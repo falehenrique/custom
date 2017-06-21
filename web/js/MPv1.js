@@ -227,6 +227,7 @@
   }
 
   MPv1.getBin = function () {
+    console.info('===getBin====');
     var cardSelector = document.querySelector(MPv1.selectors.paymentMethodSelector);
     if (cardSelector && cardSelector[cardSelector.options.selectedIndex].value != "-1") {
       return cardSelector[cardSelector.options.selectedIndex].getAttribute('first_six_digits');
@@ -254,7 +255,7 @@
   }
 
   MPv1.guessingPaymentMethod = function (event) {
-
+    console.info("====guessingPaymentMethod====");
     var bin = MPv1.getBin();
     var amount = MPv1.getAmount();
 
@@ -276,7 +277,7 @@
   };
 
   MPv1.setPaymentMethodInfo = function (status, response) {
-
+    console.info("====setPaymentMethodInfo====");
     if (status == 200) {
 
       if(MPv1.site_id != "MLM"){
@@ -421,6 +422,7 @@
   */
 
   MPv1.setInstallmentInfo = function(status, response) {
+    console.info('===setInstallmentInfo====');
     var selectorInstallments = document.querySelector(MPv1.selectors.installments);
 
     if (response.length > 0) {
@@ -542,7 +544,7 @@
 
 
     MPv1.createTokenByEvent = function(){
-
+      console.info("====createTokenByEvent====");
       var $inputs = MPv1.getForm().querySelectorAll('[data-checkout]');
       var $inputs_to_create_token = MPv1.getInputsToCreateToken();
 
@@ -578,6 +580,7 @@
     }
 
     MPv1.createTokenBySubmit = function(){
+      console.info("====createTokenBySubmit====");
       addListenerEvent(document.querySelector(MPv1.selectors.form), 'submit', MPv1.doPay);
     }
 
@@ -614,6 +617,7 @@
     }
 
     MPv1.createToken = function(){
+      console.info("====createToken====");
       MPv1.hideErrors();
 
       //show loading
@@ -630,7 +634,7 @@
     MPv1.sdkResponseHandler = function(status, response) {
       //hide loading
       document.querySelector(MPv1.selectors.box_loading).style.background = "";
-
+      console.log("aqesadas " + response);
       if (status != 200 && status != 201) {
         MPv1.showErrors(response);
       }else{
@@ -665,6 +669,7 @@
 
 
     MPv1.setForm = function () {
+      console.info("====setForm====");
       if(MPv1.customer_and_card.status){
         document.querySelector(MPv1.selectors.form).style.display = 'none';
         document.querySelector(MPv1.selectors.mpSecurityCodeCustomerAndCard).removeAttribute('style');
@@ -692,6 +697,7 @@
     }
 
     MPv1.getInputsToCreateToken = function(){
+      console.info("====getInputsToCreateToken====");
       if(MPv1.customer_and_card.status){
         return MPv1.inputs_to_create_token_customer_and_card;
       }else{
@@ -700,6 +706,7 @@
     }
 
     MPv1.truncateCard = function(response_card_token){
+      console.info("====truncateCard====");
       var first_six_digits;
       var last_four_digits;
 
@@ -781,7 +788,9 @@
         });
       }
     };
-
+    console.info("====addListenerEvent====");
+    console.info("====cardNumber====" + MPv1.selectors.cardNumber);
+    console.info("====cardNumber====" + document.querySelector(MPv1.selectors.cardNumber));
     MPv1.addListenerEvent(document.querySelector(MPv1.selectors.cardNumber), 'keyup', MPv1.guessingPaymentMethod);
     MPv1.addListenerEvent(document.querySelector(MPv1.selectors.cardNumber), 'keyup', MPv1.clearOptions);
     MPv1.addListenerEvent(document.querySelector(MPv1.selectors.cardNumber), 'change', MPv1.guessingPaymentMethod);
@@ -819,7 +828,7 @@
 
       //flow: customer & cards
       var selectorPmCustomerAndCards = document.querySelector(MPv1.selectors.pmCustomerAndCards);
-      if(MPv1.customer_and_card.default && selectorPmCustomerAndCards.childElementCount > 0){
+      if(selectorPmCustomerAndCards != null && MPv1.customer_and_card.default && selectorPmCustomerAndCards.childElementCount > 0){
         MPv1.addListenerEvent(document.querySelector(MPv1.selectors.paymentMethodSelector), 'change', MPv1.cardsHandler);
         MPv1.cardsHandler();
       }else{
@@ -828,6 +837,8 @@
         MPv1.customer_and_card.status = false;
         document.querySelector(MPv1.selectors.formCustomerAndCard).style.display = 'none';
       }
+
+      console.info(MPv1.create_token_on.event);
 
       if(MPv1.create_token_on.event){
         MPv1.createTokenByEvent();

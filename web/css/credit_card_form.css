@@ -1,0 +1,31 @@
+html {
+  background: #fff;
+}
+
+.CCBackground {
+  padding-top: 50px;
+  height: 50%;
+  background: #fff;
+}
+
+.outercontainer {
+  margin: 0px auto;
+  border: 1px solid #a6a6a6;
+  padding: 20px;
+  border-radius: 3px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+  width: 500px;
+  background: #607d8b;
+}
+
+.formcontainer {
+  margin-top: 20px;
+}
+
+.purchasebtn {
+  margin-top: 20px;
+}
+
+.btn-success {
+  backgroun-color: #0032a0;
+}

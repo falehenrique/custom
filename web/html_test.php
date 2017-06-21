@@ -865,8 +865,6 @@ $posible_test = array(
       document.querySelector("#docNumber").value = document_number;
       document.querySelector("#amount").value = amount;
 
-
-
       var event_test = {
         type: "keyup"
       }
